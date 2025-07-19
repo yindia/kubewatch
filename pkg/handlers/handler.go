@@ -17,9 +17,9 @@ limitations under the License.
 package handlers
 
 import (
-	"github.com/bitnami-labs/kubewatch/config"
-	"github.com/bitnami-labs/kubewatch/pkg/event"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/graph"
+	"github.com/yindia/kubewatch/config"
+	"github.com/yindia/kubewatch/pkg/event"
+	"github.com/yindia/kubewatch/pkg/handlers/graph"
 )
 
 // Handler is implemented by any handler.

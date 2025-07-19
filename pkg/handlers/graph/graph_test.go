@@ -23,8 +23,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/bitnami-labs/kubewatch/config"
-	"github.com/bitnami-labs/kubewatch/pkg/event"
+	"github.com/yindia/kubewatch/config"
+	"github.com/yindia/kubewatch/pkg/event"
 )
 
 func TestGraphInit(t *testing.T) {

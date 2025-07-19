@@ -19,7 +19,7 @@ package cmd
 import (
 	"strconv"
 
-	"github.com/bitnami-labs/kubewatch/config"
+	"github.com/yindia/kubewatch/config"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )

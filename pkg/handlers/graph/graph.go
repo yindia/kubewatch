@@ -25,8 +25,8 @@ import (
 	gremlingo "github.com/apache/tinkerpop/gremlin-go/v3/driver"
 	"github.com/sirupsen/logrus"
 
-	"github.com/bitnami-labs/kubewatch/config"
-	"github.com/bitnami-labs/kubewatch/pkg/event"
+	"github.com/yindia/kubewatch/config"
+	"github.com/yindia/kubewatch/pkg/event"
 )
 
 var graphErrMsg = `

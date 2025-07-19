@@ -1,6 +1,6 @@
 <div align="center">
 
-**This is the official Kubewatch project, [originally by Bitnami](https://github.com/bitnami-labs/kubewatch/), now maintained by [Robusta.dev](https://home.robusta.dev/).**
+**This is the official Kubewatch project, [originally by Bitnami](https://github.com/yindia/kubewatch/), now maintained by [Robusta.dev](https://home.robusta.dev/).**
 
 **Feel free to open issues, raise PRs or talk with us on [Slack](https://bit.ly/robusta-slack)!**
 
@@ -10,7 +10,7 @@
 
 <img src="./docs/kubewatch-logo.jpeg">
 
-[![GoDoc](https://godoc.org/github.com/bitnami-labs/kubewatch?status.svg)](https://godoc.org/github.com/bitnami-labs/kubewatch) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/bitnami-labs/kubewatch/blob/master/LICENSE)
+[![GoDoc](https://godoc.org/github.com/yindia/kubewatch?status.svg)](https://godoc.org/github.com/yindia/kubewatch) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/yindia/kubewatch/blob/master/LICENSE)
 [![slack robusta](https://img.shields.io/badge/Slack-Join-4A154B?style=flat-square&logo=slack&logoColor=white)](https://bit.ly/robusta-slack)
 
 </div>
@@ -630,7 +630,7 @@ env:
 
 Clone the repository anywhere:
 ```console
-$ git clone https://github.com/bitnami-labs/kubewatch.git
+$ git clone https://github.com/yindia/kubewatch.git
 $ cd kubewatch
 $ go build
 ```

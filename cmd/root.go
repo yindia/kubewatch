@@ -21,8 +21,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/bitnami-labs/kubewatch/config"
-	c "github.com/bitnami-labs/kubewatch/pkg/client"
+	"github.com/yindia/kubewatch/config"
+	c "github.com/yindia/kubewatch/pkg/client"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"

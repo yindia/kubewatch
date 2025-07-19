@@ -24,16 +24,7 @@ import (
 	"github.com/bitnami-labs/kubewatch/config"
 	"github.com/bitnami-labs/kubewatch/pkg/controller"
 	"github.com/bitnami-labs/kubewatch/pkg/handlers"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/cloudevent"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/flock"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/hipchat"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/lark"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/mattermost"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/msteam"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/slack"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/slackwebhook"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/smtp"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/webhook"
+	"github.com/bitnami-labs/kubewatch/pkg/handlers/graph"
 	"github.com/sirupsen/logrus"
 )
 
@@ -61,26 +52,8 @@ func ParseEventHandler(conf *config.Config) handlers.Handler {
 
 	var eventHandler handlers.Handler
 	switch {
-	case len(conf.Handler.Slack.Channel) > 0 || len(conf.Handler.Slack.Token) > 0:
-		eventHandler = new(slack.Slack)
-	case len(conf.Handler.SlackWebhook.Channel) > 0 || len(conf.Handler.SlackWebhook.Username) > 0 || len(conf.Handler.SlackWebhook.Slackwebhookurl) > 0:
-		eventHandler = new(slackwebhook.SlackWebhook)
-	case len(conf.Handler.Hipchat.Room) > 0 || len(conf.Handler.Hipchat.Token) > 0:
-		eventHandler = new(hipchat.Hipchat)
-	case len(conf.Handler.Mattermost.Channel) > 0 || len(conf.Handler.Mattermost.Url) > 0:
-		eventHandler = new(mattermost.Mattermost)
-	case len(conf.Handler.Flock.Url) > 0:
-		eventHandler = new(flock.Flock)
-	case len(conf.Handler.Webhook.Url) > 0:
-		eventHandler = new(webhook.Webhook)
-	case len(conf.Handler.CloudEvent.Url) > 0:
-		eventHandler = new(cloudevent.CloudEvent)
-	case len(conf.Handler.MSTeams.WebhookURL) > 0:
-		eventHandler = new(msteam.MSTeams)
-	case len(conf.Handler.SMTP.Smarthost) > 0 || len(conf.Handler.SMTP.To) > 0:
-		eventHandler = new(smtp.SMTP)
-	case len(conf.Handler.Lark.WebhookURL) > 0:
-		eventHandler = new(lark.Webhook)
+	case conf.Handler.Graph.Enabled && len(conf.Handler.Graph.Endpoint) > 0:
+		eventHandler = new(graph.Graph)
 	default:
 		eventHandler = new(handlers.Default)
 	}
