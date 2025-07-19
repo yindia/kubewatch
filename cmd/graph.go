@@ -24,30 +24,65 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// webhookConfigCmd represents the webhook subcommand
-var webhookConfigCmd = &cobra.Command{
+// graphConfigCmd represents the graph subcommand
+var graphConfigCmd = &cobra.Command{
 	Use:   "graph",
 	Short: "specific graph configuration",
-	Long:  `specific graph configuration`,
+	Long:  `specific graph configuration for Amazon Neptune`,
 	Run: func(cmd *cobra.Command, args []string) {
 		conf, err := config.New()
 		if err != nil {
 			logrus.Fatal(err)
 		}
 
-		url, err := cmd.Flags().GetString("url")
+		endpoint, err := cmd.Flags().GetString("endpoint")
 		if err == nil {
-			if len(url) > 0 {
-				conf.Handler.Webhook.Url = url
+			if len(endpoint) > 0 {
+				conf.Handler.Graph.Endpoint = endpoint
 			}
 		} else {
 			logrus.Fatal(err)
 		}
 
-		cert, err := cmd.Flags().GetString("cert")
+		region, err := cmd.Flags().GetString("region")
 		if err == nil {
-			if len(cert) > 0 {
-				conf.Handler.Webhook.Cert = cert
+			if len(region) > 0 {
+				conf.Handler.Graph.Region = region
+			}
+		} else {
+			logrus.Fatal(err)
+		}
+
+		enabled, err := cmd.Flags().GetString("enabled")
+		if err == nil {
+			if len(enabled) > 0 {
+				isEnabled, err := strconv.ParseBool(enabled)
+				if err != nil {
+					logrus.Fatal(err)
+				}
+				conf.Handler.Graph.Enabled = isEnabled
+			}
+		} else {
+			logrus.Fatal(err)
+		}
+
+		traversalSource, err := cmd.Flags().GetString("traversal-source")
+		if err == nil {
+			if len(traversalSource) > 0 {
+				conf.Handler.Graph.TraversalSource = traversalSource
+			}
+		} else {
+			logrus.Fatal(err)
+		}
+
+		timeout, err := cmd.Flags().GetString("timeout")
+		if err == nil {
+			if len(timeout) > 0 {
+				timeoutInt, err := strconv.Atoi(timeout)
+				if err != nil {
+					logrus.Fatal(err)
+				}
+				conf.Handler.Graph.Timeout = timeoutInt
 			}
 		} else {
 			logrus.Fatal(err)
@@ -60,9 +95,9 @@ var webhookConfigCmd = &cobra.Command{
 				if err != nil {
 					logrus.Fatal(err)
 				}
-				conf.Handler.Webhook.TlsSkip = skip
+				conf.Handler.Graph.TlsSkip = skip
 			} else {
-				conf.Handler.Webhook.TlsSkip = false
+				conf.Handler.Graph.TlsSkip = false
 			}
 		} else {
 			logrus.Fatal(err)
@@ -75,7 +110,10 @@ var webhookConfigCmd = &cobra.Command{
 }
 
 func init() {
-	webhookConfigCmd.Flags().StringP("url", "u", "", "Specify Webhook url")
-	webhookConfigCmd.Flags().StringP("cert", "", "", "Specify Webhook cert path")
-	webhookConfigCmd.Flags().StringP("tlsskip", "", "", "Specify whether Webhook skips tls verify; TRUE or FALSE")
+	graphConfigCmd.Flags().StringP("endpoint", "e", "", "Specify Neptune endpoint URL (e.g., wss://your-cluster.region.neptune.amazonaws.com:8182/gremlin)")
+	graphConfigCmd.Flags().StringP("region", "r", "", "Specify AWS region where Neptune cluster is located")
+	graphConfigCmd.Flags().StringP("enabled", "", "", "Enable graph handler; TRUE or FALSE")
+	graphConfigCmd.Flags().StringP("traversal-source", "t", "", "Specify graph traversal source (default: g)")
+	graphConfigCmd.Flags().StringP("timeout", "", "", "Specify connection timeout in seconds (default: 30)")
+	graphConfigCmd.Flags().StringP("tlsskip", "", "", "Specify whether to skip TLS verification; TRUE or FALSE")
 }

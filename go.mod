@@ -5,6 +5,7 @@ go 1.24.0
 toolchain go1.24.3
 
 require (
+	github.com/apache/tinkerpop/gremlin-go/v3 v3.7.3
 	github.com/fatih/structtag v1.2.0
 	github.com/mkmik/multierror v0.3.0
 	github.com/prometheus/client_golang v1.20.3
@@ -49,6 +50,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	github.com/nicksnyder/go-i18n/v2 v2.4.1 // indirect
 	github.com/pelletier/go-toml v1.0.1 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect
