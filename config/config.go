@@ -43,6 +43,7 @@ type Handler struct {
 	Mattermost   Mattermost   `json:"mattermost"`
 	Flock        Flock        `json:"flock"`
 	Webhook      Webhook      `json:"webhook"`
+	Graph        Graph        `json:"graph"`
 	CloudEvent   CloudEvent   `json:"cloudevent"`
 	MSTeams      MSTeams      `json:"msteams"`
 	SMTP         SMTP         `json:"smtp"`
@@ -147,6 +148,21 @@ type Webhook struct {
 	Url     string `json:"url"`
 	Cert    string `json:"cert"`
 	TlsSkip bool   `json:"tlsskip"`
+}
+
+type Graph struct {
+	// Neptune endpoint URL (e.g., wss://your-cluster.region.neptune.amazonaws.com:8182/gremlin)
+	Endpoint string `json:"endpoint"`
+	// AWS Region where Neptune cluster is located
+	Region string `json:"region"`
+	// Enable/disable the graph handler
+	Enabled bool `json:"enabled"`
+	// TLS configuration
+	TlsSkip bool `json:"tlsskip"`
+	// Graph traversal source (default: "g")
+	TraversalSource string `json:"traversalSource"`
+	// Connection timeout in seconds
+	Timeout int `json:"timeout"`
 }
 
 // Lark contains lark configuration
@@ -307,6 +323,15 @@ func (c *Config) CheckMissingResourceEnvvars() {
 	}
 	if (c.Handler.SlackWebhook.Slackwebhookurl == "") && (os.Getenv("KW_SLACK_WEBHOOK_URL") != "") {
 		c.Handler.SlackWebhook.Slackwebhookurl = os.Getenv("KW_SLACK_WEBHOOK_URL")
+	}
+	if (c.Handler.Graph.Endpoint == "") && (os.Getenv("KW_GRAPH_ENDPOINT") != "") {
+		c.Handler.Graph.Endpoint = os.Getenv("KW_GRAPH_ENDPOINT")
+	}
+	if (c.Handler.Graph.Region == "") && (os.Getenv("KW_GRAPH_REGION") != "") {
+		c.Handler.Graph.Region = os.Getenv("KW_GRAPH_REGION")
+	}
+	if !c.Handler.Graph.Enabled && os.Getenv("KW_GRAPH_ENABLED") == "true" {
+		c.Handler.Graph.Enabled = true
 	}
 }
 
