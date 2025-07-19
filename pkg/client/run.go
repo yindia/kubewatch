@@ -21,10 +21,10 @@ import (
 	"os"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 
-	"github.com/bitnami-labs/kubewatch/config"
-	"github.com/bitnami-labs/kubewatch/pkg/controller"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers/graph"
+	"github.com/yindia/kubewatch/config"
+	"github.com/yindia/kubewatch/pkg/controller"
+	"github.com/yindia/kubewatch/pkg/handlers"
+	"github.com/yindia/kubewatch/pkg/handlers/graph"
 	"github.com/sirupsen/logrus"
 )
 
